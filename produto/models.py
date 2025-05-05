@@ -3,6 +3,8 @@ from django.db import models # type: ignore
 from PIL import Image
 import os
 from django.conf import settings # type: ignore
+from django.utils.text import slugify  # type: ignore
+from utils import utils
 
 
 class Produto(models.Model):
@@ -10,10 +12,18 @@ class Produto(models.Model):
     descricao_curta = models.TextField(max_length=255)
     descricao_longa = models.TextField()
     imagem = models.ImageField(upload_to='produto_imagem/%Y/%m/', blank=True, null=True)
-    slug = models.SlugField(unique=True)
-    preco_marketing = models.FloatField()
-    preco_marketing_promocional = models.FloatField(default=0)
+    slug = models.SlugField(unique=True, blank=True, null=True)
+    preco_marketing = models.FloatField(verbose_name='Price')
+    preco_marketing_promocional = models.FloatField(default=0, verbose_name='Price promo')
     tipo = models.CharField(default='V', max_length=1, choices=(('V', 'Variacao'), ('S', 'Simples')))
+
+    def get_preco_formatado(self):
+        return utils.formata_preco(self.preco_marketing)
+    get_preco_formatado.short_description = 'Preço' # type: ignore
+
+    def get_preco_promocional_formatado(self):
+        return utils.formata_preco(self.preco_marketing_promocional)
+    get_preco_promocional_formatado.short_description = 'Preço Promo.' # type: ignore
 
 
     @staticmethod
@@ -32,6 +42,9 @@ class Produto(models.Model):
 
 
     def save(self, *args, **kwargs) :
+        if not self.slug:
+            slug = f'{slugify(self.nome)}'
+            self.slug = slug
         super().save(*args, **kwargs)
 
         max_image_size = 800
