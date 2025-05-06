@@ -1,5 +1,5 @@
 def formata_preco(val):
-    return f'$ {val:.2f}'
+    return f'£ {val:.2f}'
 
 
 def cart_total_qtd(carrinho):
@@ -16,3 +16,4 @@ def cart_totals(carrinho):
             in carrinho.values()
         ]
     )
+
