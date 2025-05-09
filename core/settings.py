@@ -44,8 +44,12 @@ INSTALLED_APPS = [
     'produto',
     'pedido',
     'perfil',
+    'crispy_forms',
 
 ]
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap4"
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -133,16 +137,16 @@ STATICFILES_DIRS = [os.path.join('templates/static')]
 MEDIA_URL = 'media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-# MESSAGE_TAGS = {
-#     constants.DEBUG: 'alert-info',
-#     constants.ERROR: 'alert-danger',
-#     constants.INFO: 'alert-info',
-#     constants.SUCCESS: 'alert-success',
-#     constants.WARNING: 'alert-warning',
-# }
+MESSAGE_TAGS = {
+    constants.DEBUG: 'alert-info',
+    constants.ERROR: 'alert-danger',
+    constants.INFO: 'alert-info',
+    constants.SUCCESS: 'alert-success',
+    constants.WARNING: 'alert-warning',
+}
 
 # # Sessão em dias: 60s * 60m * 24h * 1d
-# SESSION_COOKIE_AGE = 60 * 60 * 24 * 7
+SESSION_COOKIE_AGE = 60 * 60 * 24 * 7
 
 # # Salvar a cada requisição
 # SESSION_SAVE_EVERY_REQUEST = False
