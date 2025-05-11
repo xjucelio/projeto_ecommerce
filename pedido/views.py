@@ -89,10 +89,15 @@ class SalvarPedido(View):
         qtd_total_carrinho = utils.cart_total_qtd(carrinho)
         valor_total_carrinho = utils.cart_totals(carrinho)
 
+        # Adicione estes prints antes da criação do pedido
+        print('User:', self.request.user)
+        print('Total:', valor_total_carrinho, type(valor_total_carrinho))
+        print('Qtd total:', qtd_total_carrinho, type(qtd_total_carrinho))
+
         pedido = Pedido(
             usuario=self.request.user,
             total=valor_total_carrinho,
-            qtd_total=qtd_total_carrinho,
+            # qtd_total=qtd_total_carrinho,
             status='C',
         )
 
