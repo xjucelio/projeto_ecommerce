@@ -97,7 +97,7 @@ class SalvarPedido(View):
         pedido = Pedido(
             usuario=self.request.user,
             total=valor_total_carrinho,
-            # qtd_total=qtd_total_carrinho,
+            qtd_total=qtd_total_carrinho,
             status='C',
         )
 
